@@ -1,3 +1,5 @@
+## COMP2041 Week 2 Tutorial
+
 ### Question 4
 
 Operating system: piece of software that manages the hardware of a computer and provides an interface to the programs that run on the computer.
@@ -38,14 +40,14 @@ e. `hello.*world`
 
 f. `c[ae]l[ae]nd[ae]r`
 
-g. [0-9]+(,[0-9]+)+
+g. `[0-9]+(,[0-9]+)+`
 
-h. `"[^""]*\\n"`
+h. `"[^"]*\\n"`
 
 ### Question 6
 
 1. `<` and `>` are unix commands for file input output
-    
+
    add quotes
 
 2. `grep` does not support alteration
@@ -105,5 +107,3 @@ b. `cut -d'|' -f3 enrolments | sort | uniq | wc -l`
 c. `cut -d'|' -f3 enrolments | sort | uniq -c`   
 
 d. `sort enrolments | uniq | cut -d'|' -f1,2 | uniq -c | egrep -v '^ *1'`
-
-
