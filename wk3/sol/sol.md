@@ -1,4 +1,4 @@
-## COMP2041 Week 3 Tutorial
+### COMP2041 Week 3 Tutorial
 
 ### Question 1
 
@@ -19,12 +19,9 @@ No, we need to sort it based on family name field, but every person has differen
 
 ### Question 3
 
-a. `head -3 /etc/passwd`
-
-b. `egrep '^(cs|se|bi|en)[0-9]' /etc/passwd`
-
-c. `grep '/bin/bash' passwd | cut -d':' -f1`
-
+a. `head -3 /etc/passwd`  
+b. `egrep '^(cs|se|bi|en)[0-9]' /etc/passwd`  
+c. `grep '/bin/bash' passwd | cut -d':' -f1`  
 d. `cut -d':' -f1,2 passwd | tr ':' '\t' > passwords.txt`
 
 ## Shell Variables
@@ -44,7 +41,7 @@ d. `cut -d':' -f1,2 passwd | tr ':' '\t' > passwords.txt`
 - double-quote (") grouping, no transformations except $ and ‘
 - backquote (‘) no grouping, capture command results
 
-## Question 4
+### Question 4
 
 - the script doesn't concatenate files named on the command line,  just standard input
 - it doesn't implement all of the cat options (e.g. no -m)
@@ -74,7 +71,7 @@ do
 done
 ```
 
-## Question 5
+### Question 5
 
 ```
 #!/bin/sh
@@ -86,7 +83,7 @@ do
 done
 ```
 
-## Question 6
+### Question 6
 
 ```
 #!/bin/sh
@@ -102,7 +99,7 @@ done
 sort -n students | join marks - | cut -d' ' -f2,4,5 | sort -k2
 ```
 
-## Question 7
+### Question 7
 
 ```
 #!/bin/sh
@@ -127,7 +124,7 @@ do
 done
 ```
 
-## Question 8
+### Question 8
 
 ```
 #!/bin/sh
@@ -141,15 +138,14 @@ do
 done
 ```
 
-## Question 9
+### Question 9
 
 ```
 wc -l *.tex             // different lines
-echo `wc -l *.tex`      // make it in one line
-// no difference in content
+echo `wc -l *.tex`      // make it in one line, no difference in content
 ```
 
-## Question 10
+### Question 10
 
 ```
 #!/bin/sh
@@ -171,7 +167,7 @@ do
 done
 ```
 
-## Question 11
+### Question 11
 
 ```
 -d deletes space
@@ -179,10 +175,8 @@ done
 -s squeeze multiple occurrences to one
 ```
 
-a. 2
-
-b. 11
-
+a. 2  
+b. 11  
 c. `  4 BIG
       1 BUT
       2 IS
@@ -190,35 +184,17 @@ c. `  4 BIG
       1 SO
       2 THIS`
 
-## Question 12
-
 replaces not alphanumeric to new line, and squeeze all consecutive new lines with just one
 
-## Question 13
+### Question 13
 
-a. a b c
-
-b. a  b  c
-
-c. Y Y
-
-d. x2
-
-e.
-
-f. Y Y
-
-g. $y       `single quotes prevent expansion`
-
-h. Y: command not found
-
-i. a b c
-
+a. a b c  
+b. a&nbsp;&nbsp;b&nbsp;&nbsp;c  
+c. Y Y  
+d. x2  
+e.  
+f. Y Y  
+g. $y       `single quotes prevent expansion`  
+h. Y: command not found  
+i. a b c  
 j. a b c
-
-
-## Question 14
-
-c. 2, Y, Y
-
-d. 1, Y Y
