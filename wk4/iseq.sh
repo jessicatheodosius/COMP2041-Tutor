@@ -1,38 +1,29 @@
 #!/bin/sh
 
-if [ $# -eq 0 ]
+numberArgs="$#"
+minimum=1
+step=1
+
+if [ $numberArgs -eq 1 ]
 then
-    echo "error m8"
+    maximum=$1
+elif [ $numberArgs -eq 2 ]
+then
+    minimum=$1
+    maximum=$2
+elif [ $numberArgs -eq 3 ]
+then
+    minimum=$1
+    step=`expr $2 - $1`
+    maximum=$3
+else
+    echo "too many arguments"
     exit 1
 fi
 
-num=0
-from=1
-step=1
 
-if [ $# -eq 1 ]
-then
-    num=$1
-elif [ $# -eq 2 ]
-then
-    from=$1
-    num=$2
-else
-    from=$1
-    step=`expr $2 - $1`
-    num=$3
-fi
-
-while [ $from -le $num ]
+while [ $minimum -le $maximum ]
 do
-    echo "$from"
-    from=`expr $from + $step`
+    echo "$minimum"
+    minimum=`expr $minimum + $step`
 done
-
-
-
-
-
-
-
-

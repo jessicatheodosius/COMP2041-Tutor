@@ -1,12 +1,14 @@
 #!/bin/sh
 
-for i in `seq 2 $(($1 - 1))`
+number=$1
+
+for i in `seq 2 $(( $number - 1 ))`
 do
-    if [ `expr $1 % $i` -eq 0 ]
+    if [ `expr $number % $i` -eq 0 ]
     then
-        echo "$1 is not prime"
+        echo "$number is not prime"
         exit 1
     fi
 done
 
-echo "$1 is prime"
+echo "$number is prime"
