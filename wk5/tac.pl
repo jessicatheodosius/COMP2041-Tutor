@@ -3,5 +3,7 @@
 $ARGV[0] = "-" if (!@ARGV);
 
 foreach $file (@ARGV) {
-    # do something
+    open INPUT, "<$file" or die;
+    print reverse <INPUT>;
+    close INPUT;
 }
