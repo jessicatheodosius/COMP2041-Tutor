@@ -1,4 +1,4 @@
-## COMP2041 Week 5 Tutorial
+## COMP2041 Week 6 Tutorial
 
 - show echon.pl, test1.pl, test2.pl, test3.pl, test4.pl
 
@@ -86,8 +86,6 @@ close INPUT;
 
 ### Question 6
 
-https://perldoc.perl.org/5.8.9/Switch.html
-
 ```
 while (<>) {
     chomp;
@@ -122,7 +120,7 @@ while(<PEOPLE>) {
     print "$name\n$address, $suburb\nPhones: ";
     @numbers = ();
 
-    foreach $type (("mobile", "home", "work")) {
+    foreach $type ("mobile", "home", "work") {
         push @numbers, $phones{"$id:$type"}." ($type)"
             if defined $phones{"$id:$type"};
     }

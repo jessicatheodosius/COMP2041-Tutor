@@ -16,7 +16,7 @@ while(<PEOPLE>) {
     print "$name\n$address, $suburb\nPhones: ";
     @numbers = ();
 
-    foreach $type (("mobile", "home", "work")) {
+    foreach $type ("mobile", "home", "work") {
         push @numbers, $phones{"$id:$type"}." ($type)"
             if defined $phones{"$id:$type"};
     }
