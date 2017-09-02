@@ -1,6 +1,10 @@
 #!/usr/bin/perl -w
 
 $string = "hello1234";
+
+($_, $two) = $string =~ /([a-z]+)(\d+)/i;
+print "$two\n";
+
 ($word, $number) = $string =~ /([a-z]+)(\d+)/i;
 
 print "assign to variables\n";
