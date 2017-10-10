@@ -8,5 +8,5 @@ print "$greedy\n";
 ($non_greedy) = $s =~ /-(.*?)-/;
 print "$non_greedy\n";
 
-($bcde) = $s =~ /-.*?-(.*)-/;
-print "$bcde\n";
+($something) = $s =~ /-.*?-(.*)-/;
+print "$something\n";

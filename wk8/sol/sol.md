@@ -4,7 +4,6 @@
 - talk about non greedy search in perl `greedy.pl`
 - https://perlmaven.com/sorting-arrays-in-perl
 - https://perlmaven.com/qw-quote-word
-- https://perlmaven.com/here-documents
 - talk about comments
 
 ### Question 1
