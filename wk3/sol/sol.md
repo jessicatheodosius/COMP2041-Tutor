@@ -41,6 +41,15 @@ d. `cut -d':' -f1,2 passwd | tr ':' '\t' > passwords.txt`
 - double-quote (") grouping, no transformations except $ and ‘
 - backquote (‘) no grouping, capture command results
 
+`quotes.sh`
+
+### Before Anything Else
+
+- wildcard in `*, ?, []`
+- talk about test
+- talk about `expr.sh`
+- talk about `arg1.sh arg2.sh`
+
 ### Question 4
 
 - the script doesn't concatenate files named on the command line,  just standard input
