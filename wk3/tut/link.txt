@@ -1,0 +1,1 @@
+https://serverfault.com/questions/52034/what-is-the-difference-between-double-and-single-square-brackets-in-bash
