@@ -2,6 +2,7 @@
 
 ### Question 1
 
+- run shell: `sh myScript`
 - problem: you might not have the current directory in your PATH
 - solution: add . to the end of your PATH (via PATH=$PATH:.) or type the command name as ./myScript
 - problem: the myScript file might not be executable
@@ -23,8 +24,6 @@
 - $@ all of the command-line arguments (separately)
 - $? exit status of the most recent command
 - $$ process ID of this shell
-
-
 - single-quote (’) grouping, turns off all transformations
 - double-quote (") grouping, no transformations except $ and ‘
 - backquote (‘) no grouping, capture command results
@@ -67,8 +66,6 @@ done
 
 ### Question 3
 
-
-
 ```sh
 #!/bin/sh
 
@@ -77,12 +74,15 @@ do
     # note use of -i to ignore case and -w to ignore white space
     # however tags containing newlines won't be detected
     # why dev/null?
-    if egrep -iw '</?blink>' >/dev/null
+    # use -q instead
+    # LAB HINT for checking a thing is integer
+    if egrep -i '</?blink>' $file >/dev/null
     then
         echo  "Removing $file because it uses the <blink> tag"
         rm "$file"
     fi
 done
+
 ```
 
 ### Question 4
