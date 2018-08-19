@@ -4,5 +4,3 @@ if ($ARGV[0] eq "-v") {
     $reverse = 1;
     shift @ARGV;
 }
-
-$pattern = shift @ARGV;

@@ -1,8 +1,8 @@
 ## COMP2041 Week 5 Tutorial
 
-- use `#!/usr/bin/perl -w`
+- `dodgy.pl` warnings (-w) and strict, warnings can be turned off
+- `intro.pl`
 - to know the flags, use `perldoc perlrun`
-- `-w` is used for warning
 - `#` comment
 - `$` scalar
 - `@` array (indexed by integers)
@@ -21,7 +21,7 @@
 
 **stream**
 - `line = <STDIN>`
-- `print STOUT "Jess"`
+- `print STDOUT "Jess"`
 - `open ...`
 - `close ...`
 - `<>` treats all command-line arguments as file names, opens and reads
@@ -62,7 +62,6 @@ print $#ARGV + 1, "\n";
 print @ARGV + 0, "\n";
 
 $x = @ARGV;
-
 print "$x\n";
 ```
 
@@ -111,17 +110,26 @@ print @lines[0..$n-1];
 ### Question 5
 
 ```
-$ARGV[0] = "-" if @ARGV == 0;
-foreach $file (@ARGV) {
-    open(INPUT, "<$file") or die("$file: cannot be opened: $!\n");
-    print "==> $file <==\n";
-    $i = 0;
-    while(<INPUT>) {
-        last if ($i++ == $n);
-        print;
-    }
-    close INPUT;
+$n = 10;
+
+if (@ARGV && $ARGV[0] =~ /^-[0-9]+$/) {
+    $n = shift @ARGV;
+    $n =~ s/-//;
 }
+
+$ARGV[0] = "-" if @ARGV == 0;
+
+foreach $file (@ARGV) {
+    print "==> $file <==\n";
+
+    open INPUT, "<$file" or die "can't open $file";
+    @lines = <INPUT>;
+    close INPUT;
+
+    $n = @lines if $n > @lines;
+    print @lines[0..$n-1];
+}
+
 ```
 
 - Why don't we just use `<>` instead of `@ARGV`?
@@ -164,12 +172,12 @@ while (<>) {
 
 ```
 if (@ARGV && $ARGV[0] eq "-n") {
-    $show_line_number = 1;
+    $numbering = 1;
     shift @ARGV;
 }
 
-while(<>) {
-    printf "%6d  ", $. if ($show_line_number);
+while (<>) {
+    printf "%6d ", $. if $numbering;
     print;
 }
 ```
