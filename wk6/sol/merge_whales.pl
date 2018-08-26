@@ -1,20 +1,20 @@
 #!/usr/bin/perl -w
 
-$total = 0;
-$last = "";
+$total_count = 0;
+$prev_species = '';
 
-while ($line = <STDIN>) {
-    next if $line !~ /^(\d+)\s*(.+)\s*$/;
+foreach $line (<STDIN>) {
+    next if $line !~ /^(\d+)\s+(.*)\s*$/;
     $count = $1;
     $species = $2;
 
-    if ($species ne $last) {
-        print "$total $last\n" if $last;
-        $total = 0;
-        $last = $species;
+    if ($species ne $prev_species) {
+        printf "%d %s\n", $total_count, $prev_species if $prev_species;
+        $total_count = 0;
+        $prev_species = $species;
     }
 
-    $total += $count;
+    $total_count += $count;
 }
 
-print "$total $last\n" if $last;
+printf "%d %s\n", $total_count, $prev_species if $prev_species;

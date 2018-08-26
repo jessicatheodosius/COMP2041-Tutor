@@ -4,41 +4,47 @@
 
 ### Question 1
 
-```
-$total = 0;
-$last = "";
+```perl
+$total_count = 0;
+$prev_species = '';
 
-while ($line = <STDIN>) {
-    next if $line !~ /^(\d+)\s*(.+)\s*$/;
+foreach $line (<STDIN>) {
+    next if $line !~ /^(\d+)\s+(.*)\s*$/;
     $count = $1;
     $species = $2;
 
-    if ($species ne $last) {
-        print "$total $last\n" if $last;
-        $total = 0;
-        $last = $species;
+    if ($species ne $prev_species) {
+        printf "%d %s\n", $total_count, $prev_species if $prev_species;
+        $total_count = 0;
+        $prev_species = $species;
     }
 
-    $total += $count;
+    $total_count += $count;
 }
 
-print "$total $last\n" if $last;
-
+printf "%d %s\n", $total_count, $prev_species if $prev_species;
 ```
 
 ### Question 2
 
 - if the filename ends with a '|' , the filename is interpreted as a command that pipes output to us
+- run `python3 q2.py`
+- `./phone_numbers.pl localhost:5000`
 
-```
+```perl
 foreach $url (@ARGV) {
-    open F, "wget -q -O- $url|" or die;
-    while ($line = <F>) {
-        foreach $number (split(/[^\d\- ]/, $line)) {
-            $number =~ s/\D//g;
-            print "$number\n" if length $number >= 8 && length $number <= 15;
+    # read output of wget command
+    open INPUT, "wget -q -O- $url|" or die;
+
+    while ($line = <INPUT>) {
+        @numbers = split /[^\d\- ]/, $line;
+        foreach $num (@numbers) {
+            $num =~ s/\D//g;
+            print "$num\n" if length $num >= 8 && length $num <= 15;
         }
     }
+
+    close INPUT;
 }
 ```
 
@@ -47,84 +53,112 @@ foreach $url (@ARGV) {
 a. (((x)))
 b. hell
 c. 11 12 13 (note that 10..20 is inclusive)
+d. 1 1 2 3 3 4 5 5
 
 ### Question 4
 
 - glob returns a list of files matching the pattern
 
-```
+```perl
 $total = 0;
-# or *.[ch] for the question
-foreach $f (glob '*.{pl,txt}') {
-	open F, "<$f" or die;
-	@arr = <F>;
-	printf "%7d %s\n", scalar @arr, $f;
-    $total += @arr;
+
+for $file (glob '*.{pl,txt}') {
+    open F, '<', $file or die;
+    @lines = <F>;
+    $nlines = @lines;
+    $total += $nlines;
+
+    printf "%8d %s\n", $nlines, $file;
     close F;
 }
 
-printf "%7d total\n", $total;
+printf "%8d total\n", $total;
 ```
 
 ### Question 5
 
-```
+```perl
 ($n, $m, $file) = @ARGV;
-open INPUT, "<", $file or die;
 
-while (<INPUT>) {
-    chomp;
-    @chars = split //;
-    # do some checking on n and m if more than characters
-    print @chars[$n-1..$m-1], "\n";
+open F, '<', $file or die;
+
+while ($line = <F>) {
+    chomp $line;
+    @chars = split //, $line;
+    $len = @chars;
+
+    if ($len > 0) {
+        $begin = $n > $len ? $len : $n;
+        $end = $m > $len ? $len : $m;
+        print @chars[$begin-1..$end-1];
+    }
+    print "\n";
 }
 
-close INPUT;
+close F;
+
 ```
 
-`./cut.pl 1 4 q1.txt`
+`./cut.pl 1 8 cut.pl`
+
+`cut -c1-8 cut.pl`
 
 ### Question 6
 
 ```
 while (<>) {
     chomp;
-    ($id, $mark) = split;   # default split is space
-    if ($mark !~ /^(\d{1,2}|100)$/) {
+    ($sid, $mark) = split;
+
+    if ($mark !~ /^\d+$/) {
         $grade = "??";
     } else {
-        $grade = "FL";
-        $grade = "PS" if $mark >= 50 && $mark <= 100;
+        if ($mark > 100 || $mark < 0) {
+            $grade = "??";
+        } elsif ($mark >= 50) {
+            $grade = "PS";
+        } else {
+            $grade = "FL";
+        }
     }
-    $extra = ($grade ne "??") ? "" : " ($mark)";
-    print "$id $mark$extra\n";
+
+    print "$sid $grade";
+    print " ($mark)" if $grade eq "??";
+    print "\n";
 }
 ```
 
 ### Question 7
 
-```
+```perl
+$people_filename = 'people.txt';
+$phones_filename = 'phones.txt';
+
 %phones = ();
-open(PHONES, "<phones.txt") or die;
-while(<PHONES>) {
+
+open PHONES, '<', $phones_filename or die;
+foreach (<PHONES>) {
     chomp;
-    ($id, $type, $number) = split ',';
+    ($id, $type, $number) = split /,/;
     $phones{"$id:$type"} = $number;
 }
 close PHONES;
 
-open(PEOPLE, "<people.txt") or die;
-while(<PEOPLE>) {
+open PEOPLE, '<', $people_filename or die;
+foreach (<PEOPLE>) {
     chomp;
-    ($id, $name, $address, $suburb) = split ',';
-    print "$name\n$address, $suburb\nPhones: ";
+    ($id, $name, $address, $suburb) = split /,/;
+    print "$name\n";
+    print "$address, $suburb\n";
+    print "Phones: ";
     @numbers = ();
-
     foreach $type ("mobile", "home", "work") {
-        push @numbers, $phones{"$id:$type"}." ($type)"
-            if defined $phones{"$id:$type"};
+        $key = "$id:$type";
+        if (defined($phones{$key})) {
+            push @numbers, "$phones{$key} ($type)";
+        }
     }
     print @numbers > 0 ? join(", ", @numbers) : "?", "\n\n";
 }
-close PHONES;
+close PEOPLE;
 ```

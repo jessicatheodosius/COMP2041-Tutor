@@ -2,13 +2,21 @@
 
 while (<>) {
     chomp;
-    ($id, $mark) = split;   # default split is space
-    if ($mark !~ /^(\d{1,2}|100)$/) {
+    ($sid, $mark) = split;
+
+    if ($mark !~ /^\d+$/) {
         $grade = "??";
     } else {
-        $grade = "FL";
-        $grade = "PS" if $mark >= 50 && $mark <= 100;
+        if ($mark > 100 || $mark < 0) {
+            $grade = "??";
+        } elsif ($mark >= 50) {
+            $grade = "PS";
+        } else {
+            $grade = "FL";
+        }
     }
-    $extra = ($grade ne "??") ? "" : " ($mark)";
-    print "$id $mark$extra\n";
+
+    print "$sid $grade";
+    print " ($mark)" if $grade eq "??";
+    print "\n";
 }

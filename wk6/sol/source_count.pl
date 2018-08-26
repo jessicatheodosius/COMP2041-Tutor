@@ -1,13 +1,14 @@
 #!/usr/bin/perl -w
-
 $total = 0;
-# or *.[ch] for the question
-foreach $f (glob '*.{pl,txt}') {
-	open F, "<$f" or die;
-	@arr = <F>;
-	printf "%7d %s\n", scalar @arr, $f;
-    $total += @arr;
+
+for $file (glob '*.{pl,txt}') {
+    open F, '<', $file or die;
+    @lines = <F>;
+    $nlines = @lines;
+    $total += $nlines;
+
+    printf "%8d %s\n", $nlines, $file;
     close F;
 }
 
-printf "%7d total\n", $total;
+printf "%8d total\n", $total;

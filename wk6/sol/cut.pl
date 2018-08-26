@@ -1,13 +1,20 @@
 #!/usr/bin/perl -w
 
 ($n, $m, $file) = @ARGV;
-open INPUT, "<", $file or die;
 
-while (<INPUT>) {
-    chomp;
-    @chars = split //;
-    # do some checking on n and m if more than characters
-    print @chars[$n-1..$m-1], "\n";
+open F, '<', $file or die;
+
+while ($line = <F>) {
+    chomp $line;
+    @chars = split //, $line;
+    $len = @chars;
+
+    if ($len > 0) {
+        $begin = $n > $len ? $len : $n;
+        $end = $m > $len ? $len : $m;
+        print @chars[$begin-1..$end-1];
+    }
+    print "\n";
 }
 
-close INPUT;
+close F;
