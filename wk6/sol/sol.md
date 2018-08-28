@@ -27,6 +27,25 @@ printf "%d %s\n", $total_count, $prev_species if $prev_species;
 
 ### Question 2
 
+```perl
+#!/usr/bin/perl -w
+
+%last_seen = ();
+
+foreach $line (<STDIN>) {
+    next if $line !~ /^(\d{2}\/\d{2}\/\d{2})\s+\d+\s+(.*)\s*$/;
+    $date = $1;
+    $species = $2;
+    $last_seen{$species} = $date;
+}
+
+foreach $species (sort keys %last_seen) {
+        print "$species $last_seen{$species}\n";
+}
+```
+
+### Question 3
+
 - if the filename ends with a '|' , the filename is interpreted as a command that pipes output to us
 - run `python3 q2.py`
 - `./phone_numbers.pl localhost:5000`
@@ -48,14 +67,14 @@ foreach $url (@ARGV) {
 }
 ```
 
-### Question 3
+### Question 4
 
 a. (((x)))
 b. hell
 c. 11 12 13 (note that 10..20 is inclusive)
 d. 1 1 2 3 3 4 5 5
 
-### Question 4
+### Question 5
 
 - glob returns a list of files matching the pattern
 
@@ -75,7 +94,7 @@ for $file (glob '*.{pl,txt}') {
 printf "%8d total\n", $total;
 ```
 
-### Question 5
+### Question 6
 
 ```perl
 ($n, $m, $file) = @ARGV;
@@ -103,9 +122,9 @@ close F;
 
 `cut -c1-8 cut.pl`
 
-### Question 6
+### Question 7
 
-```
+```perl
 while (<>) {
     chomp;
     ($sid, $mark) = split;
@@ -128,7 +147,7 @@ while (<>) {
 }
 ```
 
-### Question 7
+### Question 8
 
 ```perl
 $people_filename = 'people.txt';
