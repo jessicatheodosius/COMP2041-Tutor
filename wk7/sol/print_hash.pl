@@ -1,15 +1,15 @@
 #!/usr/bin/perl -w
 
 sub printHash {
-    my (%h) = @_;
+    my (%hash) = @_;
     my $n = 0;
-    foreach $key (sort (keys %h)) {
-        printf "[%s] => %s\n", $key, $h{$key};
+    while (($key, $value) = each %hash) {
+        printf "[%s] => %s\n", $key, $value;
         $n++;
     }
     return $n;
 }
 
-%colours = ("John"=>"blue", "Anne"=>"red", "Andrew"=>"green");
+%colours = ("John" => "blue", "Anne" => "red", "Andrew" => "green");
 $n = printHash(%colours);
-print "There are $n items\n";
+print "There are $n items in our colours\n";

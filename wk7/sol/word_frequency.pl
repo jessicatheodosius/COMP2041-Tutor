@@ -1,18 +1,19 @@
 #!/usr/bin/perl -w
 
 %count_words = ();
+@lines = <STDIN>;
+$line_str = join '', @lines;
 
-while (<STDIN>) {
-    chomp;
-    foreach $word (split /\W+/) {
-        $count_words{lc($word)}++;
-    }
+foreach $word (split /\W+/, $line_str) {
+    $count_words{lc($word)} += 1;
 }
 
+# it's sort of like anonymous function
 foreach $key (sort {$count_words{$a} <=> $count_words{$b}} (keys %count_words)) {
     print "$count_words{$key} $key\n";
 }
 
+# using subroutine
 sub by_count {
     $count_words{$a} <=> $count_words{$b};
 }

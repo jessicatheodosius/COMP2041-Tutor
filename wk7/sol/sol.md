@@ -6,20 +6,21 @@
 
 ### Question 2
 
-```
+```perl
 %count_words = ();
+@lines = <STDIN>;
+$line_str = join '', @lines;
 
-while (<STDIN>) {
-    chomp;
-    foreach $word (split /\W+/) {
-        $count_words{lc($word)}++;
-    }
+foreach $word (split /\W+/, $line_str) {
+    $count_words{lc($word)} += 1;
 }
 
+# it's sort of like anonymous function
 foreach $key (sort {$count_words{$a} <=> $count_words{$b}} (keys %count_words)) {
     print "$count_words{$key} $key\n";
 }
 
+# using subroutine
 sub by_count {
     $count_words{$a} <=> $count_words{$b};
 }
@@ -33,51 +34,55 @@ foreach $key (sort by_count (keys %count_words)) {
 
 ### Question 3
 
-```
+```perl
 %words = ();
 
 open FILE, "<$ARGV[0]" or die;
-while ($word = <FILE>) {
-    chomp $word;
-    $words{$word} = 1;
+while (<FILE>) {
+    chomp;
+    foreach $word (split /\W+/) {
+        $words{$word} = 1;
+    }
 }
 close FILE;
 
 open FILE, "<$ARGV[1]" or die;
-while ($word = <FILE>) {
-    chomp $word;
-    delete $words{$word} if exists $words{$word};
+while (<FILE>) {
+    chomp;
+    foreach $word (split /\W+/) {
+        delete $words{$word} if exists $words{$word};
+    }
 }
 close FILE;
 
-for $key (sort (keys %words)) {
-    print "$key\n";
+foreach $word (sort keys %words) {
+    print "$word\n";
 }
 ```
 
-- difference between exists and hash (in the picture)
+- difference between exists and defined (in the picture)
 
 ### Question 5
 
-```
+```perl
 sub printHash {
-    my (%h) = @_;
+    my (%hash) = @_;
     my $n = 0;
-    foreach $key (sort (keys %h)) {
-        printf "[%s] => %s\n", $key, $h{$key};
+    while (($key, $value) = each %hash) {
+        printf "[%s] => %s\n", $key, $value;
         $n++;
     }
     return $n;
 }
 
-%colours = ("John"=>"blue", "Anne"=>"red", "Andrew"=>"green");
+%colours = ("John" => "blue", "Anne" => "red", "Andrew" => "green");
 $n = printHash(%colours);
-print "There are $n items\n";
+print "There are $n items in our colours\n";
 ```
 
 ### Question 6
 
-```
+```perl
 %bigrams = ();
 $prev_word = "";
 
@@ -90,18 +95,18 @@ while (<STDIN>) {
     }
 }
 
-foreach $key (sort (keys %bigrams)) {
+foreach $prev_word (sort keys %bigrams) {
     $total = 0;
     $max_word = "";
     $max_count = 0;
 
-    for $word (keys %{$bigrams{$key}}) {
-        $total += $bigrams{$key}{$word};
-        if ($max_count < $bigrams{$key}{$word}) {
-            $max_count = $bigrams{$key}{$word};
+    for $word (keys %{$bigrams{$prev_word}}) {
+        $total += $bigrams{$prev_word}{$word};
+        if ($max_count < $bigrams{$prev_word}{$word}) {
+            $max_count = $bigrams{$prev_word}{$word};
             $max_word = $word;
         }
     }
-    printf "%s(%d) %s(%d)\n", $key, $total, $max_word, $max_count;
+    printf "%s(%d) %s(%d)\n", $prev_word, $total, $max_word, $max_count;
 }
 ```
