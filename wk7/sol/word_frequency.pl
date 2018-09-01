@@ -2,10 +2,10 @@
 
 %count_words = ();
 @lines = <STDIN>;
-$line_str = join '', @lines;
+$line_str = lc join '', @lines;
 
 foreach $word (split /\W+/, $line_str) {
-    $count_words{lc($word)} += 1;
+    $count_words{$word} += 1;
 }
 
 # it's sort of like anonymous function

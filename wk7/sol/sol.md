@@ -1,6 +1,7 @@
 ## COMP2041 Week 7 Tutorial
 
 - talk about my - global.pl
+- talk about add, cmp
 - be consistent whether to use brackets or not, though I do admit that I omit it if I can
 - convention about names (just be super consistent camel case or snake case)
 
@@ -9,10 +10,10 @@
 ```perl
 %count_words = ();
 @lines = <STDIN>;
-$line_str = join '', @lines;
+$line_str = lc join '', @lines;
 
 foreach $word (split /\W+/, $line_str) {
-    $count_words{lc($word)} += 1;
+    $count_words{$word} += 1;
 }
 
 # it's sort of like anonymous function
@@ -28,6 +29,7 @@ sub by_count {
 foreach $key (sort by_count (keys %count_words)) {
     print "$count_words{$key} $key\n";
 }
+
 ```
 
 - can supply a subroutine as the first parameter to sort
