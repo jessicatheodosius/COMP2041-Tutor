@@ -1,0 +1,21 @@
+body {
+  margin-top: 10px;
+}
+
+.container {
+  width: 50%;
+  text-align: center;
+}
+
+#catsList {
+  margin-top: 25px;
+}
+
+li.cat:hover {
+  background-color: rgba(100, 100, 100, 0.2);
+  cursor: pointer;
+}
+
+#catsView {
+  margin-top: 20px;
+}

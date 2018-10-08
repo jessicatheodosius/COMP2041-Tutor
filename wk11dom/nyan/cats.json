@@ -1,0 +1,18 @@
+const cats = [
+  {
+    "name": "Mexican",
+    "url": "mexinyan.gif"
+  },
+  {
+    "name": "Original",
+    "url": "mexinyan.gif"
+  },
+  {
+    "name": "Pikachu",
+    "url": "pikanyan.gif"
+  },
+  {
+    "name": "Pirate",
+    "url": "Pirate.gif" 
+  }
+]
