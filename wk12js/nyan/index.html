@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+  <title>Nyan Cats</title>
+  <script type="module" src="src/CatList.js"></script>
+  <script type="module" src="src/helpers.js"></script>
+</head>
+<body style="margin-top: 10px">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-6">
+        <div class="card">
+          <h5 class="card-header">Add a Cat!</h5>
+          <div class="card-body">
+            <form>
+              <div class="form-group">
+                <label for="catName">Cat Name</label>
+                <input type="text" class="form-control" id="catName" placeholder="Cat Name">
+              </div>
+              <div class="form-group">
+                <label for="catDescription">Cat Description</label>
+                <input type="text" class="form-control" id="catDescription" placeholder="Cat Description">
+              </div>
+              <div class="form-group">
+                <label for="catUrl">Cat URL</label>
+                <input type="text" class="form-control" id="catName" placeholder="Cat URL">
+              </div>
+              <div class="text-center">
+                <button type="submit" class="btn btn-success">Submit</button>
+              </div>
+            </form>
+          </div>
+        </div>
+        <div id="displayCat" style="margin-top: 10px">Display Cat Here!</div>
+      </div>
+      <div class="col-md-6">
+        <h2>Our Cats</h2>
+        <div id="catsList"></div>
+      </div>
+    </div>
+  </div>
+  <script type="module" src="src/main.js"></script>
+</body>
+</html>
