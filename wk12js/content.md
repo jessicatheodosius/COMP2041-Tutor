@@ -1,0 +1,2 @@
+- event loop: https://www.youtube.com/watch?v=8aGhZQkoFbQ
+- async: https://medium.com/front-end-hacking/callbacks-promises-and-async-await-ad4756e01d90

@@ -35,12 +35,13 @@ export default class CatList {
         body: JSON.stringify(cat)
       });
       const { _id } = await response.json();
+
+      this.setState({
+        cats: [...this.state.cats, {_id, ...cat}]
+      });
     } catch(err) {
       console.warn(`API_ERROR: ${err.message}`);
     }
-    this.setState({
-      cats: [...cats, {_id, ...cat}]
-    });
   }
 
   async displayCat(_id) {
@@ -50,6 +51,10 @@ export default class CatList {
       const displayCatEl = document.getElementById('displayCat');
       const img = document.createElement('img');
       img.src = url;
+      img.addEventListener('error', () => {
+        alert(`Can't load this image`);
+        displayCatEl.innerHTML = '';
+      });
       displayCatEl.innerHTML = img.outerHTML;
     } catch(err) {
       console.warn(`API_ERROR: ${err.message}`);
@@ -69,6 +74,7 @@ export default class CatList {
   render() {
     const { loaded, cats } = this.state;
     const el = document.getElementById('catsList');
+    el.innerHTML = '';
     let toRender;
 
     if (!loaded) {
