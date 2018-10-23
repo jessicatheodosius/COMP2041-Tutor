@@ -13,3 +13,13 @@
 `q4.js`
 
 #### Question 6
+
+`q6v[1234].js`
+
+#### Question 8
+
+#### Question 9 & 10
+
+`q9.txt`
+
+#### Question 11
